@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: User.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: User.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const Client = require("./Client")
+
+class User{
+    /**
+     * @constructor
+     * @param {Object} data An object containing user data
+     * @param {Client} client The client being used
+     */
+    constructor(data, client){
+        this.client = client
+        this.instance = client.instance
+        this.id = data.id
+        this.name = data.name
+        this.role = data.role
+        this.credits = data.credits
+        this.server_limit = data.server_limit
+        this.pterodactyl_id = data.pterodactyl_id
+        this.avatar = data.avatar
+        this.email = data.email
+        this.email_verified_at = data.email_verified_at
+        this.created_at = data.created_at
+        this.updated_at = data.updated_at
+        this.ip = data.ip
+        this.last_seen = data.last_seen
+        this.discord_verified_at = data.discord_verified_at
+    }
+
+    /**
+     * Update this user
+     * @param {{name:?string, email:?string, credits:?number, server_limit:?number, role:?('admin' | 'mod' | 'client' | 'member')}} data An object with updated user data
+     * @returns {Promise&lt;User>} Updated self
+     * @async
+     */
+    async update(data){
+        const allowedKeys = ['name', 'email', 'credits', 'server_limit', 'role']
+        if(!allowedKeys.some(key => data[key]))
+            throw new Error('None of the arguement properties lie in the allowed list: ' + allowedKeys.join(', '))
+
+        let newData
+        allowedKeys.filter(key => data[key]).forEach(key => {newData[key] = data[key]})
+
+        const response = await this.instance.patch(`/api/users/${this.id}`, data)
+        Object.assign(this, newData)
+        return this
+    }
+
+    /**
+     * Delete this user
+     * @returns {Promise&lt;void>} void
+     * @async
+     */
+    async delete(){
+        this.instance.delete(`/api/users/${this.id}`)
+    }
+
+    /**
+     * Increment credits for this user
+     * @param {number} credits Amount of credits to increment
+     * @returns {Promise&lt;void>} void
+     * @async
+     */
+    async incrementCredits(credits){
+        if(!credits || !typeof(credits) === 'number')
+            throw new Error('\"credits\" is a required *numerical* arguement.')
+        const response = await this.instance.patch(`/api/users/${this.id}/increment`, {credits: credits})
+        Object.assign(this, response.data)
+    }
+
+    /**
+     * Decrement credits for this user
+     * @param {number} credits Amount of credits to decrement
+     * @returns {Promise&lt;void>} void
+     * @async
+     */
+    async decrementCredits(credits){
+        if(!credits || !typeof(credits) === 'number')
+            throw new Error('\"credits\" is a required *numerical* arguement.')
+        const response = await this.instance.patch(`/api/users/${this.id}/decrement`, {credits: credits})
+        Object.assign(this, response.data)
+    }
+
+    /**
+     * Increment server limit for this user
+     * @param {number} server_limit Number by which server limit is incremented
+     * @returns {Promise&lt;void>} void
+     * @async 
+     */
+    async incrementServerLimit(server_limit){
+        if(!server_limit || !typeof(server_limit) === 'number')
+            throw new Error('\"server_limit\" is a required *numerical* arguement.')
+        const response = await this.instance.patch(`/api/users/${this.id}/increment`, {server_limit: Math.trunc(server_limit)})
+        Object.assign(this, response.data)
+    }
+
+    /**
+     * Decrement server limit for this user
+     * @param {number} server_limit Number by which server limit is decremented
+     * @returns {Promise&lt;void>} void
+     * @async
+     */
+    async decrementServerLimit(server_limit){
+        if(!server_limit || !typeof(server_limit) === 'number')
+            throw new Error('\"server_limit\" is a required *numerical* arguement.')
+        const response = await this.instance.patch(`/api/users/${this.id}/decrement`, {server_limit: Math.trunc(server_limit)})
+        Object.assign(this, response.data)
+    }
+}
+module.exports = User</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Client.html">Client</a></li><li><a href="Server.html">Server</a></li><li><a href="ServerManager.html">ServerManager</a></li><li><a href="User.html">User</a></li><li><a href="UserManager.html">UserManager</a></li><li><a href="Voucher.html">Voucher</a></li><li><a href="VoucherManager.html">VoucherManager</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Fri Aug 06 2021 12:28:32 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
