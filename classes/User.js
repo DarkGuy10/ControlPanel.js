@@ -36,7 +36,7 @@ class User{
         if(!allowedKeys.some(key => data[key]))
             throw new Error('None of the arguement properties lie in the allowed list: ' + allowedKeys.join(', '))
 
-        let newData
+        let newData = {}
         allowedKeys.filter(key => data[key]).forEach(key => {newData[key] = data[key]})
 
         const response = await this.instance.patch(`/api/users/${this.id}`, data)
