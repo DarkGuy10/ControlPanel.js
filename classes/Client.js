@@ -22,8 +22,20 @@ class Client{
                 "Authorization": `Bearer ${this.key}`
             }
         })
+        
+        /** The ServerManager for this client
+         * @type {ServerManager}
+         */
         this.servers = new ServerManager(this)
+
+        /** The UserManager for this client
+         * @type {UserManager}
+         */
         this.users = new UserManager(this)
+
+        /** The VoucherManager for this client
+         * @type {VoucherManager}
+         */
         this.vouchers = new VoucherManager(this)
     }
 }
