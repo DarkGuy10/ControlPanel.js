@@ -20,7 +20,7 @@ class UserManager{
     async fetch(id) {
         if(!id) throw new Error('\"id\" is a required parameter.')
         return this.instance.get(`/api/users/${id}`)
-            .then(response => new User(response, this.client))
+            .then(response => new User(response.data, this.client))
             .catch(() => false)
     }
 

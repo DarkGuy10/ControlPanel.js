@@ -20,7 +20,7 @@ class ServerManager{
     async fetch(id){
         if(!id) throw new Error('\"id\" is a required parameter.')
         return this.instance.get(`/api/servers/${id}`)
-            .then(response => response.data)
+            .then(response => new Server(response.data, this.client))
             .catch(() => false)
     }
 

@@ -20,7 +20,7 @@ class VoucherManager{
     async fetch(id) {
         if(!id) throw new Error('\"id\" is a required parameter.')
         return this.instance.get(`/api/vouchers/${id}`)
-            .then(response => new Voucher(response, this.client))
+            .then(response => new Voucher(response.data, this.client))
             .catch(() => false)
     }
 
