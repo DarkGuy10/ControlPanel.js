@@ -7,9 +7,7 @@ class Server{
      * @param {Client} client The client being used
      */
     constructor(data, client){
-        this = {
-            ...data
-        }
+        Object.assign(this, data)
         this.client = client
         this.instance = client.instance
     }
@@ -21,7 +19,7 @@ class Server{
      */
     async suspend(){
         const response = await this.instance.patch(`/api/servers/${this.id}/suspend`)
-        this = new Server(response.data, this.client)
+        Object.assign(this, response.data)
     }
 
     /**
@@ -31,7 +29,7 @@ class Server{
      */
     async unsuspend(){
         const response = await this.instance.patch(`/api/servers/${this.id}/unsuspend`)
-        this = new Server(response.data, this.client)
+        Object.assign(this, response.data)
     }
 
     /**

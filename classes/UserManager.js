@@ -13,7 +13,7 @@ class UserManager{
 
     /**
      * Fetch a user from their id
-     * @param {*} id The id of user being fetched. This is NOT the pterodactyl id
+     * @param {string} id The id of user being fetched. This is NOT the pterodactyl id
      * @returns {Promise<User>} Fetched user
      * @async
      */

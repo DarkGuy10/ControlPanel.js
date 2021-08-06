@@ -23,7 +23,7 @@ class Voucher{
     
     /**
      * Update this voucher
-     * @param {{memo?:string code:string uses:number credits:number expires_at?:string}} data An object with updated voucher data
+     * @param {{memo:?string, code:string, uses:number, credits:number, expires_at:?string}} data An object with updated voucher data
      * @returns {Promise<Voucher>} Updated self
      * @async
      */
@@ -41,7 +41,7 @@ class Voucher{
             voucherData[key] = data[key]
         }
         const response = await this.instance.patch(`/api/vouchers/${this.id}`, voucherData)
-        this = new Voucher(response.data, this.client)
+        Object.assign(this, voucherData)
         return this
     }
 

@@ -13,7 +13,7 @@ class VoucherManager{
 
     /**
      * Fetch a voucher from its id
-     * @param {*} id 
+     * @param {string} id 
      * @returns {Promise<Voucher>} Fetched voucher
      * @async
      */
@@ -43,7 +43,7 @@ class VoucherManager{
 
     /**
      * Create a new voucher
-     * @param {{memo?:string code:string uses:number credits:number expires_at?:string}} data An object containing voucher data
+     * @param {{memo:?string, code:string, uses:number, credits:number, expires_at:?string}} data An object containing voucher data
      * @returns {Promise<Voucher>} The newly created voucher
      * @async
      */

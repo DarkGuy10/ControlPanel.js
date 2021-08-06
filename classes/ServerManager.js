@@ -13,7 +13,7 @@ class ServerManager{
 
     /**
      * Fetch a server from its id
-     * @param {*} id The id of server being fetched. This is NOT the pterodactyl id
+     * @param {string} id The id of server being fetched. This is NOT the pterodactyl id
      * @returns {Promise<Server>} Fetched server
      * @async
      */
