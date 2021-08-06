@@ -1,5 +1,5 @@
 {
-  "name": "controlpanel.js",
+  "name": "controlpanelapi.js",
   "version": "1.0.0",
   "description": "An API wrapper for ControlPanel dashboard",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DarkGuy10/ControlPanel.js.git"
+    "url": "git+https://github.com/DarkGuy10/ControlPanelAPI.js.git"
   },
   "keywords": [
     "controlpanel-gg",
@@ -18,9 +18,9 @@
   "author": "DarkGuy10",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/DarkGuy10/ControlPanel.js/issues"
+    "url": "https://github.com/DarkGuy10/ControlPanelAPI.js/issues"
   },
-  "homepage": "https://github.com/DarkGuy10/ControlPanel.js#readme",
+  "homepage": "https://github.com/DarkGuy10/ControlPanelAPI.js#readme",
   "dependencies": {
     "axios": "^0.21.1"
   }
