@@ -32,7 +32,7 @@ class UserManager{
     async fetchAll(){
         const users = []
         const pageCount = (await this.instance.get('/api/users')).data['last_page']
-        const promises = [...Array.keys(pageCount + 1)].slice(1).map(async page => {
+        const promises = [...Array(pageCount + 1).keys()].slice(1).map(async page => {
             const data = (await this.instance.get(`/api/users?page=${page}`)).data['data'].map(each => new User(each, this.client))
             return data
         })

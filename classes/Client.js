@@ -14,9 +14,6 @@ class Client{
     constructor(host, key) {
         this.host = host
         this.key = key
-        this.servers = new ServerManager(this)
-        this.users = new UserManager(this)
-        this.vouchers = new VoucherManager(this)
         this.instance = axios.create({
             baseURL: this.host,
             headers: {
@@ -25,6 +22,9 @@ class Client{
                 "Authorization": `Bearer ${this.key}`
             }
         })
+        this.servers = new ServerManager(this)
+        this.users = new UserManager(this)
+        this.vouchers = new VoucherManager(this)
     }
 }
 

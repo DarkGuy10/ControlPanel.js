@@ -32,7 +32,7 @@ class ServerManager{
     async fetchAll(){
         const servers = []
         const pageCount = (await this.instance.get('/api/servers')).data['last_page']
-        const promises = [...Array.keys(pageCount + 1)].slice(1).map(async page => {
+        const promises =  [...Array(pageCount + 1).keys()].slice(1).map(async page => {
             const data = (await this.instance.get(`/api/servers?page=${page}`)).data['data'].map(each => new Server(each, this.client))
             return data
         })
