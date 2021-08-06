@@ -27,7 +27,7 @@ class User{
 
     /**
      * Update this user
-     * @param {{name?:string email?:string credits?:number server_limit?:number role?:string}} data An object with updated user data
+     * @param {{name?:string email?:string credits?:number server_limit?:number role?:('admin' | 'mod' | 'client' | 'member')}} data An object with updated user data
      * @returns {Promise<User>} Updated self
      * @async
      */
