@@ -1,4 +1,5 @@
 const Client = require("./Client")
+let instance
 
 class Server{
     /**
@@ -8,8 +9,7 @@ class Server{
      */
     constructor(data, client){
         Object.assign(this, data)
-        this.client = client
-        this.instance = client.instance
+        instance = client.instance
     }
 
     /**
@@ -18,7 +18,7 @@ class Server{
      * @async
      */
     async suspend(){
-        const response = await this.instance.patch(`/api/servers/${this.id}/suspend`)
+        const response = await instance.patch(`/api/servers/${this.id}/suspend`)
         Object.assign(this, response.data)
     }
 
@@ -28,7 +28,7 @@ class Server{
      * @async
      */
     async unsuspend(){
-        const response = await this.instance.patch(`/api/servers/${this.id}/unsuspend`)
+        const response = await instance.patch(`/api/servers/${this.id}/unsuspend`)
         Object.assign(this, response.data)
     }
 
@@ -38,7 +38,7 @@ class Server{
      * @async
      */
     async delete(){
-        this.instance.delete(`/api/servers/${this.id}`)
+        instance.delete(`/api/servers/${this.id}`)
     }
 }
 module.exports = Server

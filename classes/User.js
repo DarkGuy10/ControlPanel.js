@@ -1,4 +1,5 @@
 const Client = require("./Client")
+let instance
 
 class User{
     /**
@@ -7,8 +8,7 @@ class User{
      * @param {Client} client The client being used
      */
     constructor(data, client){
-        this.client = client
-        this.instance = client.instance
+        instance = client.instance
         this.id = data.id
         this.name = data.name
         this.role = data.role
@@ -39,7 +39,7 @@ class User{
         let newData = {}
         allowedKeys.filter(key => data[key]).forEach(key => {newData[key] = data[key]})
 
-        const response = await this.instance.patch(`/api/users/${this.id}`, data)
+        const response = await instance.patch(`/api/users/${this.id}`, data)
         Object.assign(this, newData)
         return this
     }
@@ -50,7 +50,7 @@ class User{
      * @async
      */
     async delete(){
-        this.instance.delete(`/api/users/${this.id}`)
+        instance.delete(`/api/users/${this.id}`)
     }
 
     /**
@@ -62,7 +62,7 @@ class User{
     async incrementCredits(credits){
         if(!credits || !typeof(credits) === 'number')
             throw new Error('\"credits\" is a required *numerical* arguement.')
-        const response = await this.instance.patch(`/api/users/${this.id}/increment`, {credits: credits})
+        const response = await instance.patch(`/api/users/${this.id}/increment`, {credits: credits})
         Object.assign(this, response.data)
     }
 
@@ -75,7 +75,7 @@ class User{
     async decrementCredits(credits){
         if(!credits || !typeof(credits) === 'number')
             throw new Error('\"credits\" is a required *numerical* arguement.')
-        const response = await this.instance.patch(`/api/users/${this.id}/decrement`, {credits: credits})
+        const response = await instance.patch(`/api/users/${this.id}/decrement`, {credits: credits})
         Object.assign(this, response.data)
     }
 
@@ -88,7 +88,7 @@ class User{
     async incrementServerLimit(server_limit){
         if(!server_limit || !typeof(server_limit) === 'number')
             throw new Error('\"server_limit\" is a required *numerical* arguement.')
-        const response = await this.instance.patch(`/api/users/${this.id}/increment`, {server_limit: Math.trunc(server_limit)})
+        const response = await instance.patch(`/api/users/${this.id}/increment`, {server_limit: Math.trunc(server_limit)})
         Object.assign(this, response.data)
     }
 
@@ -101,7 +101,7 @@ class User{
     async decrementServerLimit(server_limit){
         if(!server_limit || !typeof(server_limit) === 'number')
             throw new Error('\"server_limit\" is a required *numerical* arguement.')
-        const response = await this.instance.patch(`/api/users/${this.id}/decrement`, {server_limit: Math.trunc(server_limit)})
+        const response = await instance.patch(`/api/users/${this.id}/decrement`, {server_limit: Math.trunc(server_limit)})
         Object.assign(this, response.data)
     }
 }

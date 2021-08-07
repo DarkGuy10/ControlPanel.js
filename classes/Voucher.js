@@ -1,4 +1,5 @@
 const Client = require("./Client")
+let instance
 
 class Voucher{
     /**
@@ -7,8 +8,7 @@ class Voucher{
      * @param {Client} client The client being used
      */
     constructor(data, client){
-        this.client = client
-        this.instance = client.instance
+        instance = client.instance
         this.id = data.id
         this.code = data.code
         this.memo = data.memo
@@ -40,7 +40,7 @@ class Voucher{
                 throw new Error('Arguement properties do not comply with rules. Check controlpanel docs for more details.')
             voucherData[key] = data[key]
         }
-        const response = await this.instance.patch(`/api/vouchers/${this.id}`, voucherData)
+        const response = await instance.patch(`/api/vouchers/${this.id}`, voucherData)
         Object.assign(this, voucherData)
         return this
     }
@@ -51,7 +51,7 @@ class Voucher{
      * @async
      */
     async delete(){
-        this.instance.delete(`/api/vouchers/${this.id}`)
+        instance.delete(`/api/vouchers/${this.id}`)
     }
 }
 module.exports = Voucher
