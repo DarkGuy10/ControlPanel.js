@@ -31,9 +31,9 @@ class ServerManager{
      */
     async fetchAll(){
         const servers = []
-        const pageCount = (await this.instance.get('/api/servers')).data['last_page']
+        const pageCount = (await this.instance.get('/api/servers?per_page=1000')).data['last_page']
         const promises =  [...Array(pageCount + 1).keys()].slice(1).map(async page => {
-            const data = (await this.instance.get(`/api/servers?page=${page}`)).data['data'].map(each => new Server(each, this.client))
+            const data = (await this.instance.get(`/api/servers?page=${page}&&per_page=1000`)).data['data'].map(each => new Server(each, this.client))
             return data
         })
         for(const promise of promises)

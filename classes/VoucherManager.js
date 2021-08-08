@@ -31,9 +31,9 @@ class VoucherManager{
      */
     async fetchAll(){
         const vouchers = []
-        const pageCount = (await this.instance.get('/api/vouchers')).data['last_page']
+        const pageCount = (await this.instance.get('/api/vouchers?per_page=1000')).data['last_page']
         const promises =  [...Array(pageCount + 1).keys()].slice(1).map(async page => {
-            const data = (await this.instance.get(`/api/vouchers?page=${page}`)).data['data'].map(each => new Voucher(each, this.client))
+            const data = (await this.instance.get(`/api/vouchers?page=${page}&&per_page=1000`)).data['data'].map(each => new Voucher(each, this.client))
             return data
         })
         for(const promise of promises)
