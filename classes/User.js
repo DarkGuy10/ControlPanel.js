@@ -104,5 +104,17 @@ class User{
         const response = await instance.patch(`/api/users/${this.id}/decrement`, {server_limit: Math.trunc(server_limit)})
         Object.assign(this, response.data)
     }
+
+    /**
+     * Transforms object data to JSON format
+     * @returns {Object} Object data in JSON format
+     */
+    toJSON(){
+        let data = {}
+        Object.keys(this).filter(key => typeof(this[key]) != 'function').forEach(key => {
+            data[key] = this[key]
+        })
+        return JSON.stringify(data)
+    }
 }
 module.exports = User

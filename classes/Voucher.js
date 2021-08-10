@@ -53,5 +53,17 @@ class Voucher{
     async delete(){
         instance.delete(`/api/vouchers/${this.id}`)
     }
+
+    /**
+     * Transforms object data to JSON format
+     * @returns {Object} Object data in JSON format
+     */
+    toJSON(){
+        let data = {}
+        Object.keys(this).filter(key => typeof(this[key]) != 'function').forEach(key => {
+            data[key] = this[key]
+        })
+        return JSON.stringify(data)
+    }
 }
 module.exports = Voucher
