@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/DarkGuy10/ControlPanelAPI.js#readme",
   "dependencies": {
+    "@discordjs/collection": "^0.2.1",
     "axios": "^0.21.1"
   }
 }
