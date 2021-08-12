@@ -1,3 +1,4 @@
+const { default: Collection } = require("@discordjs/collection")
 const Client = require("./Client")
 const User = require("./User")
 
@@ -26,7 +27,7 @@ class UserManager{
 
     /**
      * Fetch all users
-     * @returns {Promise<Array<User>>} An array of all users
+     * @returns {Promise<Collection<string, User>>} A Collection of users mapped with their id
      * @async
      */
     async fetchAll(){
@@ -38,7 +39,7 @@ class UserManager{
         })
         for(const promise of promises)
             users.pushArray(await promise)
-        return users
+        return new Collection(users.map(user => [user.id, user]))
     }
 
 }

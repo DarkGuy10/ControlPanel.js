@@ -1,3 +1,4 @@
+const { default: Collection } = require("@discordjs/collection")
 const Client = require("./Client")
 const Server = require("./Server")
 
@@ -26,7 +27,7 @@ class ServerManager{
 
     /**
      * Fetch all servers
-     * @returns {Promise<Array<Server>>} An array of all servers
+     * @returns {Promise<Collection<string, Server>>} A Collection of servers mapped with their id
      * @async
      */
     async fetchAll(){
@@ -38,7 +39,7 @@ class ServerManager{
         })
         for(const promise of promises)
             servers.pushArray(await promise)
-        return servers
+        return new Collection(servers.map(server => [server.id, server]))
     }
 }
 

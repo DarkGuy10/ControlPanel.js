@@ -1,3 +1,4 @@
+const { default: Collection } = require("@discordjs/collection")
 const Client = require("./Client")
 const Voucher = require("./Voucher")
 
@@ -26,7 +27,7 @@ class VoucherManager{
 
     /**
      * Fetch all vouchers
-     * @returns {Promise<Array<Voucher>>} An array of all vouchers
+     * @returns {Promise<Collection<string, Voucher>>} A Collection of vouchers mapped with their id
      * @async
      */
     async fetchAll(){
@@ -38,7 +39,7 @@ class VoucherManager{
         })
         for(const promise of promises)
             vouchers.pushArray(await promise)
-        return vouchers
+        return new Collection(vouchers.map(voucher => [voucher.id, voucher]))
     }
 
     /**

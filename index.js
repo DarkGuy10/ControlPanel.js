@@ -1,3 +1,4 @@
+const { default: Collection } = require("@discordjs/collection")
 const Client = require("./classes/Client")
 const Server = require("./classes/Server")
 const ServerManager = require("./classes/ServerManager")
@@ -13,5 +14,6 @@ module.exports = {
     Voucher,
     ServerManager,
     UserManager,
-    VoucherManager
+    VoucherManager,
+    Collection
 }
