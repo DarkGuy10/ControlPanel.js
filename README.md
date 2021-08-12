@@ -6,6 +6,7 @@ ControlPanel provides a dashboard and billing-system for Pterodactyl hosts.
 * Object-oriented
 * Includes latest features
 * 100% promise-based
+* Uses discordjs#Collections data structures
 
 ## Example
 ```javascript
